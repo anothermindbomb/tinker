@@ -13,7 +13,11 @@ namespace Tinker
             Console.ReadLine();
 
         }
-
+        /// <summary>
+        /// Recursively walk the entire directory structure. We take care of the directories,
+        /// and let the ComputeSHA routine worry about all of the files therein.
+        /// </summary>
+        /// <param name="startDir"></param>
         static void DirSearch(string startDir)
         {
             try
@@ -29,7 +33,11 @@ namespace Tinker
                 Console.WriteLine(excpt.Message);
             }
         }
-
+        /// <summary>
+        /// Computes the SHA1 value for each file in the current directory. Does nothing but dump the 
+        /// SHA1 to the screen.
+        /// </summary>
+        /// <param name="directory"></param>
         static void computeSHA(string directory)
         {
             DirectoryInfo dir = new DirectoryInfo(directory);
@@ -51,7 +59,10 @@ namespace Tinker
                 fileStream.Close();
             }
         }
-
+        /// <summary>
+        /// Take a byte array, and pretty print it to the console.
+        /// </summary>
+        /// <param name="array"></param>
         public static void PrintByteArray(byte[] array)
         {
             int i;
