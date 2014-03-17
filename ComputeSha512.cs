@@ -8,7 +8,8 @@ namespace Tinker
     {
         static void Main(string[] args)
         {
-            DirSearch(@"C:/");
+            DirSearch(@"C:/Windows");
+            Console.WriteLine("Done. Hit Enter to close this window");
             Console.ReadLine();
 
         }
@@ -19,7 +20,7 @@ namespace Tinker
             {
                 foreach (string d in Directory.GetDirectories(startDir))
                 {
-                    computeSHA512(d);
+                    computeSHA(d);
                     DirSearch(d);
                 }
             }
@@ -29,27 +30,24 @@ namespace Tinker
             }
         }
 
-        static void computeSHA512(string directory)
+        static void computeSHA(string directory)
         {
             DirectoryInfo dir = new DirectoryInfo(directory);
             // Get the FileInfo objects for every file in the directory.
             FileInfo[] files = dir.GetFiles();
-            SHA512 mySHA512 = SHA512Managed.Create();
+            SHA1 mySHA = SHA1Managed.Create();
             byte[] hashValue;
             // Compute and print the hash values for each file in directory.
             foreach (FileInfo fInfo in files)
             {
-                // Create a fileStream for the file.
                 FileStream fileStream = fInfo.Open(FileMode.Open);
-                // Be sure it's positioned to the beginning of the stream.
+                // Be sure the filestream is positioned to the beginning of the stream.
                 fileStream.Position = 0;
-                // Compute the hash of the fileStream.
-                hashValue = mySHA512.ComputeHash(fileStream);
-                // Write the name of the file to the Console.
+                // Compute the hash of the fileStream - it's a byte array so we need to decode it to print it
+                // correctly.
+                hashValue = mySHA.ComputeHash(fileStream);
                 Console.Write(fInfo.Name + ": ");
-                // Write the hash value to the Console.
                 PrintByteArray(hashValue);
-                // Close the file.
                 fileStream.Close();
             }
         }

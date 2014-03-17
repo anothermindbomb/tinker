@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>collections.Collections</StartupObject>
+    <StartupObject>Tinker.ComputeSha512</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
